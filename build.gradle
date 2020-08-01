@@ -1,0 +1,84 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-kapt"
+
+android {
+  compileSdkVersion android_target_sdk_version
+  buildToolsVersion "$android_build_tools_version"
+
+  defaultConfig {
+    minSdkVersion android_min_sdk_version
+    targetSdkVersion android_target_sdk_version
+
+    versionCode android_version_code
+    versionName "$android_version_name"
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+    }
+  }
+
+  dataBinding {
+    enabled = true
+  }
+
+  sourceSets {
+    main {
+      java.srcDirs += "src/main/kotlin"
+      androidTest.java.srcDirs += "src/androidTest/kotlin"
+      test.java.srcDirs += "src/test/kotlin"
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+}
+
+dependencies {
+  implementation fileTree(dir: "libs", include: ["*.jar"])
+
+  implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+  implementation "org.koin:koin-android:$koin_version"
+  implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+
+  implementation "androidx.appcompat:appcompat:$appcompat_version"
+
+  implementation "androidx.lifecycle:lifecycle-extensions:$arch_lifecycle_version"
+
+  implementation "androidx.room:room-runtime:$arch_persistent_room_version"
+
+  implementation "androidx.paging:paging-runtime:$arch_paging_version"
+
+  implementation "io.reactivex.rxjava2:rxjava:$rx_java_version"
+  implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
+
+  implementation "com.google.android.gms:play-services-location:$play_services_version"
+  implementation "com.google.android.gms:play-services-maps:$play_services_version"
+
+  implementation "com.google.maps.android:android-maps-utils:$map_utils_version"
+  implementation "com.google.maps:google-maps-services:$maps_services_version"
+
+  implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+  implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+  implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+
+  implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+  implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+
+  implementation "com.google.code.gson:gson:$gson_version"
+
+  implementation "com.squareup.picasso:picasso:$picasso_version"
+
+  implementation "com.google.firebase:firebase-crashlytics:$firebase_crashlytics_version"
+}
