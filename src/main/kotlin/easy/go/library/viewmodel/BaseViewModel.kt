@@ -12,6 +12,8 @@ open class BaseViewModel : ViewModel() {
 
   private val disposables = CompositeDisposable()
 
+  fun addDisposable(disposable: Disposable) = disposables.add(disposable)
+
   fun addDisposable(vararg disposable: Disposable) = disposables.addAll(*disposable)
 
   override fun onCleared() {
