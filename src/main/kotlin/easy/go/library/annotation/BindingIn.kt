@@ -8,4 +8,4 @@ import androidx.annotation.LayoutRes
  */
 @Target(AnnotationTarget.FUNCTION)
 @Retention(value = AnnotationRetention.SOURCE)
-annotation class BindingWith(@LayoutRes vararg val ids: Int)
+annotation class BindingIn(@LayoutRes vararg val ids: Int)
