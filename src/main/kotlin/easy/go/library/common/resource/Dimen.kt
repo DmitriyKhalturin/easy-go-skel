@@ -1,4 +1,4 @@
-package easy.go.library.common
+package easy.go.library.common.resource
 
 import android.content.res.Resources
 
