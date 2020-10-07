@@ -44,6 +44,12 @@ class NavigationViewModel : BaseViewModel(), Navigation {
     }
   }
 
+  override fun startIntentActivity(intent: Intent, bundle: Bundle?) {
+    fragmentActivity?.use {
+      startActivity(intent, bundle)
+    }
+  }
+
   /**
    * Navigation methods for fragment
    */
