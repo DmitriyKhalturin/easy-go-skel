@@ -23,7 +23,7 @@ fun <T> List<T>.sublist(offset: Int, limit: Int): List<T> {
   }
 }
 
-inline fun <reified T: Any, R: Any> letElements(vararg elements: T?, closure: (Array<T>) -> R): R? {
+inline fun <reified T: Any, R: Any> letElements(vararg elements: T?, closure: (Array<T>) -> R?): R? {
   return if (elements.all { it != null }) {
     closure(elements.filterNotNull().toTypedArray())
   } else null
