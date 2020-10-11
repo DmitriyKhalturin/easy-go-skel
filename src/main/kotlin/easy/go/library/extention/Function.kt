@@ -28,3 +28,7 @@ inline fun <reified T: Any, R: Any> letElements(vararg elements: T?, closure: (A
     closure(elements.filterNotNull().toTypedArray())
   } else null
 }
+
+inline fun <T> collect(count: Int, action: (index: Int) -> T): List<T> {
+  return List(count) { action(it) }
+}
