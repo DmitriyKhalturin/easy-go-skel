@@ -1,4 +1,4 @@
-package easy.go.library.extention
+package easy.go.library.extension
 
 /**
  * Created by Dmitriy Khalturin <dmitry.halturin.86@gmail.com>
