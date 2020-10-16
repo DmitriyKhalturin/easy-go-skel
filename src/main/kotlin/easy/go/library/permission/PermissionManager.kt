@@ -98,7 +98,7 @@ class PermissionManager(
       AccessResult.PERMISSION_GRANTED
     } else {
       if (
-        when{
+        when {
           activity is Activity -> shouldShowRequestPermissionsRationale(activity, permissions)
           fragment is Fragment -> shouldShowRequestPermissionsRationale(fragment, permissions)
           else -> throw ImpossibleException()

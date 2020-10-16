@@ -30,5 +30,5 @@ inline fun <reified T: Any, R: Any> letElements(vararg elements: T?, closure: (A
 }
 
 inline fun <T> collect(count: Int, action: (index: Int) -> T): List<T> {
-  return List(count) { action(it) }
+  return if (count > 0) List(count) { action(it) } else emptyList()
 }
