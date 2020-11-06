@@ -12,7 +12,9 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import com.squareup.picasso.RequestCreator
 import com.squareup.picasso.Transformation
+import easy.go.skel.R
 import easy.go.skel.view.extension.getRoundedBitmapDrawable
 
 /**
@@ -24,7 +26,13 @@ class PicassoImageView @JvmOverloads constructor(context: Context, attrs: Attrib
   private val imageView: ImageView
   private val loadingComponent: ProgressBar
 
+  private val scaleType: Int
+
+  private var isCircular: Boolean
+
   init {
+    val a = context.obtainStyledAttributes(attrs, R.styleable.PicassoImageView, defStyleAttr, defStyleRes)
+
     imageView = ImageView(context, attrs).apply {
       layoutParams = LayoutParams(MATCH_PARENT, MATCH_PARENT)
 
@@ -39,12 +47,11 @@ class PicassoImageView @JvmOverloads constructor(context: Context, attrs: Attrib
 
     addView(imageView)
     addView(loadingComponent)
-  }
 
-  private var isCircular = false
+    scaleType = a.getInt(R.styleable.PicassoImageView_scaleType, -1)
+    isCircular = a.getBoolean(R.styleable.PicassoImageView_circular, false)
 
-  fun setCircular(value: Boolean) {
-    isCircular = value
+    a.recycle()
   }
 
   // TODO: transformation don't work
@@ -70,6 +77,14 @@ class PicassoImageView @JvmOverloads constructor(context: Context, attrs: Attrib
     }
   }
 
+  private fun RequestCreator.scaleTypeOf(scaleType: Int): RequestCreator {
+    return when (scaleType) {
+      0 -> centerCrop()
+      1 -> centerInside()
+      else -> this
+    }
+  }
+
   fun setImageUrl(url: String?) {
     Picasso.get().run {
       cancelRequest(imageView)
@@ -78,6 +93,8 @@ class PicassoImageView @JvmOverloads constructor(context: Context, attrs: Attrib
 
       load(url)
         .apply { if (isCircular) transform(transformationToCircular) }
+        .fit()
+        .scaleTypeOf(scaleType)
         .into(imageView, picassoCallback)
     }
   }
