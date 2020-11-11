@@ -8,12 +8,12 @@ import android.content.res.Resources
  */
 object Dimen {
 
-  private val density: Int
-    get() = Resources.getSystem().displayMetrics.density.toInt()
+  private val density: Float
+    get() = Resources.getSystem().displayMetrics.density
 
   @JvmStatic
-  fun dpToPx(dp: Int) = (dp * density)
+  fun dpToPx(dp: Int) = (dp * density).toInt()
 
   @JvmStatic
-  fun pxToDp(px: Int) = (px.toFloat() / density).toInt()
+  fun pxToDp(px: Int) = (px / density).toInt()
 }
