@@ -11,7 +11,7 @@ import java.lang.reflect.ParameterizedType
  */
 abstract class DatabaseClient<T: RoomDatabase> constructor(private val context: Context) {
 
-  // TODO: check class casting
+  @Suppress("UNCHECKED_CAST")
   private val typeOfT: Class<T> =
     ((javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>)
 

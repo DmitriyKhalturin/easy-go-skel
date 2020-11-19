@@ -65,7 +65,7 @@ abstract class ApiClient<T>(
     OkHttp3Downloader(httpClient)
   }
 
-  // TODO: check class casting
+  @Suppress("UNCHECKED_CAST")
   private val typeOfT: Class<T> =
     ((javaClass.genericSuperclass as ParameterizedType).actualTypeArguments[0] as Class<T>)
 
