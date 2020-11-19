@@ -49,3 +49,11 @@ inline fun <T: Response<R>, R> T.useResponse(emitter: CompletableEmitter, block:
     emitter.onError(exception)
   }
 }
+
+inline fun <T: Response<R>, R> T.useResponse(block: (R) -> Unit) {
+  try {
+    checkResponse(block)
+  } catch (exception: Exception) {
+    FirebaseCrashlytics.getInstance().recordException(exception)
+  }
+}
