@@ -25,6 +25,14 @@ fun <T> SingleEmitter<T>.use(block: () -> Unit) =
     onError(exception)
   }
 
+fun <T> MaybeEmitter<T>.use(block: () -> Unit) =
+  try {
+    block()
+  } catch (exception: Exception) {
+    FirebaseCrashlytics.getInstance().recordException(exception)
+    onError(exception)
+  }
+
 fun CompletableEmitter.use(block: () -> Unit) =
   try {
     block()
@@ -39,6 +47,10 @@ fun <T> Observable<T>.subscribe(emitter: ObservableEmitter<T>): Disposable {
 
 fun <T> Single<T>.subscribe(emitter: SingleEmitter<T>): Disposable {
   return subscribe(emitter::onSuccess, emitter::onError)
+}
+
+fun <T> Maybe<T>.subscribe(emitter: MaybeEmitter<T>): Disposable {
+  return subscribe(emitter::onSuccess, emitter::onError, emitter::onComplete)
 }
 
 fun Completable.subscribe(emitter: CompletableEmitter): Disposable {
