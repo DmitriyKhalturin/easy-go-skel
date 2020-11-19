@@ -22,6 +22,11 @@ abstract class BaseRepository(
       .subscribeOn(Schedulers.from(jobExecutor))
       .observeOn(AndroidSchedulers.mainThread())
 
+  protected fun <T> buildMaybe(source: (emitter: MaybeEmitter<T>) -> Unit) =
+    Maybe.create(source)
+      .subscribeOn(Schedulers.from(jobExecutor))
+      .observeOn(AndroidSchedulers.mainThread())
+
   protected fun buildCompletable(source: (emitter: CompletableEmitter) -> Unit) =
     Completable.create(source)
       .subscribeOn(Schedulers.from(jobExecutor))
