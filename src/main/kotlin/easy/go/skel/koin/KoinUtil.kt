@@ -2,6 +2,7 @@ package easy.go.skel.koin
 
 import android.content.Context
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import org.koin.core.module.Module
@@ -14,12 +15,8 @@ object KoinUtil {
   @JvmStatic
   fun start(context: Context, modules: List<Module>, debug: Boolean = false) {
     startKoin {
-      printLogger(level = if (debug) {
-        Level.DEBUG
-      } else {
-        Level.ERROR
-      })
-
+      val level = if (debug) Level.DEBUG else Level.INFO
+      androidLogger(level)
       androidContext(context)
 
       modules(modules)

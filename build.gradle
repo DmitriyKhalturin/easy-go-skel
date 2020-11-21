@@ -1,7 +1,9 @@
-apply plugin: "com.android.library"
-apply plugin: "kotlin-android"
-apply plugin: "kotlin-android-extensions"
-apply plugin: "kotlin-kapt"
+plugins {
+  id "com.android.library"
+  id "kotlin-android"
+  id "kotlin-android-extensions"
+  id "kotlin-kapt"
+}
 
 android {
   compileSdkVersion android_target_sdk_version
@@ -61,18 +63,18 @@ dependencies {
 
   implementation "androidx.room:room-runtime:$arch_persistent_room_version"
 
-  implementation "androidx.paging:paging-runtime:$arch_paging_version"
+  implementation "androidx.paging:paging-runtime-ktx:$arch_paging_version"
 
-  implementation "androidx.browser:browser:$browser_version"
+  implementation "androidx.browser:browser:1.2.0"
 
-  implementation "io.reactivex.rxjava2:rxjava:$rx_java_version"
-  implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
+  implementation "io.reactivex.rxjava2:rxjava:2.2.9"
+  implementation "io.reactivex.rxjava2:rxandroid:2.1.1"
 
-  implementation "com.google.android.gms:play-services-location:$play_services_version"
-  implementation "com.google.android.gms:play-services-maps:$play_services_version"
+  implementation "com.google.android.gms:play-services-location:17.1.0"
+  implementation "com.google.android.gms:play-services-maps:17.0.0"
 
-  implementation "com.google.maps.android:android-maps-utils:$map_utils_version"
-  implementation "com.google.maps:google-maps-services:$maps_services_version"
+  implementation "com.google.maps.android:android-maps-utils:0.6.1"
+  implementation "com.google.maps:google-maps-services:0.13.0"
 
   implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
   implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
