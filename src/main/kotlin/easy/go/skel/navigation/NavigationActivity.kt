@@ -9,7 +9,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  * Created by Dmitriy Khalturin <dmitry.halturin.86@gmail.com>
  * for easy_go_skel on 06.04.20 19:41.
  */
-abstract class NavigationActivity : AppCompatActivity() {
+open class NavigationActivity : AppCompatActivity() {
 
   protected val navigationViewModel by viewModel<NavigationViewModel>()
 
@@ -24,7 +24,4 @@ abstract class NavigationActivity : AppCompatActivity() {
 
     super.onDestroy()
   }
-
-  abstract fun setBottomNavigationVisibility(isVisible: Boolean)
-  abstract fun setBottomNavigationRootFragment(fragmentClass: Class<out Fragment>)
 }

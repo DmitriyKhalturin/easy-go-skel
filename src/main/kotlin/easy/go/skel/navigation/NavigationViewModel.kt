@@ -75,7 +75,9 @@ class NavigationViewModel : BaseViewModel(), Navigation {
     fragmentManager?.use {
       popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
-      (fragmentActivity as? NavigationActivity)?.setBottomNavigationRootFragment(fragmentClass)
+      (fragmentActivity as? NavigationWithBottomMenuActivity)?.run {
+        onSetRootFragment(fragmentClass)
+      }
 
       beginTransaction()
         .replace(fragmentContainerId!!, fragmentClass, arguments)
@@ -124,7 +126,11 @@ class NavigationViewModel : BaseViewModel(), Navigation {
    * Extension navigation methods
    */
 
-  private fun FragmentActivity.startActivity(activityClass: Class<out FragmentActivity>, isRoot: Boolean = false, bundle: Bundle? = null) {
+  private fun FragmentActivity.startActivity(
+    activityClass: Class<out FragmentActivity>,
+    isRoot: Boolean = false,
+    bundle: Bundle? = null
+  ) {
     val intent = Intent(this, activityClass)
 
     if (isRoot) {
