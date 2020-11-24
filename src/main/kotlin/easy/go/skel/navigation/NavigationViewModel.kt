@@ -10,14 +10,14 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.ViewModel
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import easy.go.skel.viewmodel.BaseViewModel
 
 /**
  * Created by Dmitriy Khalturin <dmitry.halturin.86@gmail.com>
  * for easy_go_skel on 06.04.20 16:36.
  */
-class NavigationViewModel : BaseViewModel(), Navigation {
+class NavigationViewModel : ViewModel(), Navigation {
 
   private var fragmentActivity: FragmentActivity? = null
   private var fragmentManager: FragmentManager? = null

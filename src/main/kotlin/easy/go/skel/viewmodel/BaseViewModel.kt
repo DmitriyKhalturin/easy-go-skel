@@ -1,8 +1,9 @@
 package easy.go.skel.viewmodel
 
 import androidx.lifecycle.ViewModel
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
+import androidx.lifecycle.viewModelScope
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+import kotlinx.coroutines.*
 
 /**
  * Created by Dmitriy Khalturin <dmitry.halturin.86@gmail.com>
@@ -10,15 +11,29 @@ import io.reactivex.disposables.Disposable
  */
 open class BaseViewModel : ViewModel() {
 
-  private val disposables = CompositeDisposable()
+  private val supervisor = SupervisorJob()
 
-  fun addDisposable(disposable: Disposable) = disposables.add(disposable)
-
-  fun addDisposable(vararg disposable: Disposable) = disposables.addAll(*disposable)
-
-  override fun onCleared() {
-    disposables.clear()
-
-    super.onCleared()
+  private val exceptionHandler = CoroutineExceptionHandler { _, e ->
+    onExceptionHandler(e)
   }
+
+  open fun onExceptionHandler(e: Throwable) {
+    FirebaseCrashlytics.getInstance().recordException(e)
+  }
+
+  protected val coroutineContext = (supervisor + exceptionHandler)
+
+  protected inline fun launch(crossinline block: suspend CoroutineScope.() -> Unit): Job {
+    return viewModelScope.launch(coroutineContext) {
+      block()
+    }
+  }
+
+  protected inline fun <T> async(crossinline block: suspend CoroutineScope.() -> T): Deferred<T> {
+    return viewModelScope.async(coroutineContext) {
+      block()
+    }
+  }
+
+  // TODO: implement later: produce, actor, broadcast
 }

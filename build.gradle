@@ -60,6 +60,8 @@ dependencies {
   implementation "androidx.appcompat:appcompat:$appcompat_version"
 
   implementation "androidx.lifecycle:lifecycle-extensions:$arch_lifecycle_version"
+  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$arch_lifecycle_version"
+  implementation "androidx.lifecycle:lifecycle-runtime-ktx:$arch_lifecycle_version"
 
   implementation "androidx.room:room-runtime:$arch_persistent_room_version"
 
