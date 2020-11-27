@@ -23,17 +23,15 @@ open class BaseViewModel : ViewModel() {
 
   protected val coroutineContext = (supervisor + exceptionHandler)
 
-  protected inline fun launch(crossinline block: suspend CoroutineScope.() -> Unit): Job {
-    return viewModelScope.launch(coroutineContext) {
+  protected inline fun launch(crossinline block: suspend CoroutineScope.() -> Unit) =
+    viewModelScope.launch(coroutineContext) {
       block()
     }
-  }
 
-  protected inline fun <T> async(crossinline block: suspend CoroutineScope.() -> T): Deferred<T> {
-    return viewModelScope.async(coroutineContext) {
+  protected inline fun <T> async(crossinline block: suspend CoroutineScope.() -> T): Deferred<T> =
+    viewModelScope.async(coroutineContext) {
       block()
     }
-  }
 
   // TODO: implement later: produce, actor, broadcast
 }
