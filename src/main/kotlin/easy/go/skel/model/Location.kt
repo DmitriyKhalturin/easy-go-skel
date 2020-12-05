@@ -1,7 +1,7 @@
 package easy.go.skel.model
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 /**
  * Created by Dmitriy Khalturin <dmitry.halturin.86@gmail.com>
