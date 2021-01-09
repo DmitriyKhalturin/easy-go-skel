@@ -12,8 +12,8 @@ object Dimen {
     get() = Resources.getSystem().displayMetrics.density
 
   @JvmStatic
-  fun dpToPx(dp: Int) = (dp * density).toInt()
+  fun dpToPx(dp: Int) = dp * density
 
   @JvmStatic
-  fun pxToDp(px: Int) = (px / density).toInt()
+  fun pxToDp(px: Int) = px / density
 }

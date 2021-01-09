@@ -75,7 +75,7 @@ class NavigationViewModel : ViewModel(), Navigation {
     fragmentManager?.use {
       popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE)
 
-      (fragmentActivity as? NavigationWithBottomMenuActivity)?.run {
+      (fragmentActivity as? BottomNavigationViewActivity)?.run {
         onSetRootFragment(fragmentClass)
       }
 
