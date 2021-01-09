@@ -61,6 +61,9 @@ abstract class BottomAppBarActivity : NavigationActivity(), BottomAppBarComponen
     bottomAppBar.setNavigationOnClickListener(::navigationOnClick)
     navigationView.setNavigationItemSelectedListener(::navigationItemSelect)
     scrimView.setOnClickListener(::scrimOnClick)
+
+    fab.post { if (fabState == null) hideFab() }
+    bottomAppBar.post { if (bottomAppBarState == null) hideBottomAppBar() }
   }
 
 
