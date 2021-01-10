@@ -3,9 +3,6 @@ package easy.go.skel.repository
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import easy.go.skel.exception.ApiResponseException
 import easy.go.skel.exception.NullableApiResponseException
-import io.reactivex.CompletableEmitter
-import io.reactivex.ObservableEmitter
-import io.reactivex.SingleEmitter
 import retrofit2.Response
 
 /**
@@ -20,33 +17,6 @@ inline fun <T: Response<R>, R> T.checkResponse(block: (R) -> Unit) {
     block(result)
   } else {
     throw ApiResponseException(this)
-  }
-}
-
-inline fun <T: Response<R>, R> T.useResponse(emitter: ObservableEmitter<*>, block: (R) -> Unit) {
-  try {
-    checkResponse(block)
-  } catch (exception: Exception) {
-    FirebaseCrashlytics.getInstance().recordException(exception)
-    emitter.onError(exception)
-  }
-}
-
-inline fun <T: Response<R>, R> T.useResponse(emitter: SingleEmitter<*>, block: (R) -> Unit) {
-  try {
-    checkResponse(block)
-  } catch (exception: Exception) {
-    FirebaseCrashlytics.getInstance().recordException(exception)
-    emitter.onError(exception)
-  }
-}
-
-inline fun <T: Response<R>, R> T.useResponse(emitter: CompletableEmitter, block: (R) -> Unit) {
-  try {
-    checkResponse(block)
-  } catch (exception: Exception) {
-    FirebaseCrashlytics.getInstance().recordException(exception)
-    emitter.onError(exception)
   }
 }
 

@@ -20,19 +20,19 @@ abstract class PagedListFragment<T, VH: RecyclerView.ViewHolder> : NavigationFra
   protected lateinit var listView: RecyclerView
 
   protected fun listInit(gridSpanCount: Int = 0) {
-    if(gridSpanCount > 0) {
-      val layoutManager = getGridLayoutManager(gridSpanCount)
-      setLayoutManager(layoutManager)
+    val layoutManager = if(gridSpanCount > 0) {
+      getGridLayoutManager(gridSpanCount)
     } else {
-      val layoutManager = getLinearLayoutManager()
-      setLayoutManager(layoutManager)
+      getLinearLayoutManager()
     }
+
+    setLayoutManager(layoutManager)
 
     listFetch()
   }
 
   private fun setLayoutManager(layoutManager: RecyclerView.LayoutManager) {
-    listView.run {
+    listView.apply {
       this.layoutManager = layoutManager
       adapter = pagedListAdapter
     }
