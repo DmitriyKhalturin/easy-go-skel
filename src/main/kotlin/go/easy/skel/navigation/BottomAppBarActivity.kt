@@ -24,6 +24,7 @@ import go.easy.skel.R
 import go.easy.skel.navigation.state.BottomAppBarState
 import go.easy.skel.navigation.state.FabState
 import go.easy.skel.navigation.state.NavigationMenuState
+import go.easy.skel.navigation.state.ToolBarMenuState
 import java.lang.ref.WeakReference
 
 /**
@@ -128,6 +129,12 @@ abstract class BottomAppBarActivity : NavigationActivity(), BottomAppBarComponen
       showNavigationMenu(state.navigationMenuState)
     }
 
+    if (state.toolBarMenuState == null) {
+      hideToolBarMenu()
+    } else {
+      showToolBarMenu(state.toolBarMenuState)
+    }
+
     bottomAppBar.performShow()
 
     if (state.scrollFlags == SCROLL_FLAG_NO_SCROLL) {
@@ -145,6 +152,23 @@ abstract class BottomAppBarActivity : NavigationActivity(), BottomAppBarComponen
   private fun showNavigationMenu(state: NavigationMenuState) {
     bottomAppBar.setNavigationIcon(state.navigationDrawableResId)
     navigationMenuBehavior.fillNavigationView(state)
+  }
+
+  private fun hideToolBarMenu() {
+    bottomAppBar.apply {
+      menu.clear()
+      setOnMenuItemClickListener(null)
+    }
+  }
+
+  private fun showToolBarMenu(state: ToolBarMenuState) {
+    bottomAppBar.apply {
+      replaceMenu(state.toolBarMenuResId)
+      setOnMenuItemClickListener {
+        state.onToolBarMenuItemSelected.invoke(it)
+        true
+      }
+    }
   }
 
   private fun clearAppBarScrollFlags() {

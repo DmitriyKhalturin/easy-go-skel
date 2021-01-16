@@ -8,3 +8,4 @@ import android.view.MenuItem
  */
 
 typealias OnNavigationMenuItemSelected = (menuItem: MenuItem) -> Unit
+typealias OnToolBarMenuItemSelected = (menuItem: MenuItem) -> Unit

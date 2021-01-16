@@ -9,5 +9,6 @@ import com.google.android.material.appbar.AppBarLayout.LayoutParams.ScrollFlags
  */
 data class BottomAppBarState(
   val navigationMenuState: NavigationMenuState? = null,
+  val toolBarMenuState: ToolBarMenuState? = null,
   @ScrollFlags val scrollFlags: Int = SCROLL_FLAG_NO_SCROLL,
 )
