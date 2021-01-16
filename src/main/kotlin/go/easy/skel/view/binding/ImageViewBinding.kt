@@ -17,13 +17,11 @@ object ImageViewBinding {
 
   @JvmStatic
   @BindingAdapter(value = ["isRoundedBitmap"])
-  fun bindIsRoundedBitmap(view: ImageView, value: Boolean) {
-    if (value) {
-      (view.drawable as? BitmapDrawable)?.let {
-        val roundedBitmap = it.bitmap.getRoundedBitmapDrawable(view.context.resources)
+  fun bindIsRoundedBitmap(view: ImageView, notUse: Nothing?) {
+    (view.drawable as? BitmapDrawable)?.let {
+      val roundedBitmap = it.bitmap.getRoundedBitmapDrawable(view.context.resources)
 
-        view.setImageDrawable(roundedBitmap)
-      }
+      view.setImageDrawable(roundedBitmap)
     }
   }
 
