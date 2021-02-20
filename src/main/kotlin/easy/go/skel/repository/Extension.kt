@@ -28,7 +28,7 @@ inline fun <T: Response<R>, R> T.useResponse(emitter: ObservableEmitter<*>, bloc
     checkResponse(block)
   } catch (exception: Exception) {
     FirebaseCrashlytics.getInstance().recordException(exception)
-    emitter.onError(exception)
+    emitter.tryOnError(exception)
   }
 }
 
@@ -37,7 +37,7 @@ inline fun <T: Response<R>, R> T.useResponse(emitter: SingleEmitter<*>, block: (
     checkResponse(block)
   } catch (exception: Exception) {
     FirebaseCrashlytics.getInstance().recordException(exception)
-    emitter.onError(exception)
+    emitter.tryOnError(exception)
   }
 }
 
@@ -46,7 +46,7 @@ inline fun <T: Response<R>, R> T.useResponse(emitter: CompletableEmitter, block:
     checkResponse(block)
   } catch (exception: Exception) {
     FirebaseCrashlytics.getInstance().recordException(exception)
-    emitter.onError(exception)
+    emitter.tryOnError(exception)
   }
 }
 
