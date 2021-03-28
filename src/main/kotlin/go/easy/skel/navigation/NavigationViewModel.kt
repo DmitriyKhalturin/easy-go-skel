@@ -1,9 +1,12 @@
 package go.easy.skel.navigation
 
+import android.annotation.SuppressLint
+import android.content.ComponentName
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.annotation.ColorRes
+import androidx.browser.customtabs.CustomTabColorSchemeParams
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
@@ -19,6 +22,7 @@ import com.google.firebase.crashlytics.FirebaseCrashlytics
  */
 class NavigationViewModel : ViewModel(), Navigation {
 
+  @SuppressLint("StaticFieldLeak")
   private var fragmentActivity: FragmentActivity? = null
   private var fragmentManager: FragmentManager? = null
   private var fragmentContainerId: Int? = null
@@ -55,16 +59,16 @@ class NavigationViewModel : ViewModel(), Navigation {
 
   /** Navigation method for start resolved activity */
 
+  @SuppressLint("QueryPermissionsNeeded")
   override fun startIntentResolvedActivity(intent: Intent): Boolean {
-    return intent.takeIf {
-      val componentName = fragmentActivity?.packageManager?.let {
-          packageManager -> it.resolveActivity(packageManager)
-      }
-      componentName != null
-    }?.let {
-      startIntentActivity(it)
+    val component = fragmentActivity?.packageManager?.let {
+      intent.resolveActivity(it)
+    }
+
+    return if (component is ComponentName) {
+      startIntentActivity(intent)
       true
-    } != null
+    } else false
   }
 
   /**
@@ -110,8 +114,11 @@ class NavigationViewModel : ViewModel(), Navigation {
     fragmentActivity?.let {
       CustomTabsIntent.Builder()
         .apply {
-          setToolbarColor(ContextCompat.getColor(it, customTabsColor))
-          addDefaultShareMenuItem()
+          val params = CustomTabColorSchemeParams.Builder()
+            .setToolbarColor(ContextCompat.getColor(it, customTabsColor))
+            .build()
+          setDefaultColorSchemeParams(params)
+          setShareState(CustomTabsIntent.SHARE_STATE_ON)
           setShowTitle(true)
         }
         .build()
