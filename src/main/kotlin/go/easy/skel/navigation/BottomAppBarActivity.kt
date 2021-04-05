@@ -39,6 +39,9 @@ abstract class BottomAppBarActivity : NavigationActivity(), BottomAppBarComponen
     private val fabId = R.id.fab
     private val navigationViewId = R.id.navigation_view
     private val scrimViewId = R.id.scrim_view
+
+    private const val NULL_ANIMATION_DURATION = 0L
+    private const val HACK_ANIMATION_DURATION = 250L
   }
 
   private val bottomAppBar: BottomAppBar by lazy { findViewById(bottomAppBarId) }
@@ -63,8 +66,24 @@ abstract class BottomAppBarActivity : NavigationActivity(), BottomAppBarComponen
     navigationView.setNavigationItemSelectedListener(::navigationItemSelect)
     scrimView.setOnClickListener(::scrimOnClick)
 
-    fab.post { if (fabState == null) hideFab() }
-    bottomAppBar.post { if (bottomAppBarState == null) hideBottomAppBar() }
+    fab.post {
+      val state = fabState
+
+      if (state == null) hideFab()
+      else showFab(state)
+    }
+    bottomAppBar.post {
+      val state = bottomAppBarState
+
+      val delay = if (state == null) HACK_ANIMATION_DURATION else NULL_ANIMATION_DURATION
+
+      bottomAppBar.postDelayed({
+        bottomAppBar.visibility = VISIBLE
+      }, delay)
+
+      if (state == null) hideBottomAppBar()
+      else showBottomAppBar(state)
+    }
   }
 
 
