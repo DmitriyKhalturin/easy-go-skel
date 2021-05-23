@@ -45,12 +45,18 @@ android {
   kotlinOptions {
     jvmTarget = "1.8"
   }
+
+  configurations.all() {
+    resolutionStrategy.force "org.antlr:antlr4-runtime:4.5.3"
+    resolutionStrategy.force "org.antlr:antlr4-tool:4.5.3"
+  }
 }
 
 dependencies {
   implementation fileTree(dir: "libs", include: ["*.jar"])
 
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
   implementation "io.insert-koin:koin-android:$koin_version"
   implementation "io.insert-koin:koin-androidx-viewmodel:$koin_version"
