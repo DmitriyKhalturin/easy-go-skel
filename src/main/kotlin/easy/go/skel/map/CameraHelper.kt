@@ -27,10 +27,10 @@ object CameraHelper {
         val lats = positions.map { it.latitude }
         val lngs = positions.map { it.longitude }
 
-        val north = LatLng(lats.max()!!, lngs.max()!!)
-        val south = LatLng(lats.min()!!, lngs.min()!!)
-        val west = LatLng(lats.max()!!, lngs.min()!!)
-        val east = LatLng(lats.min()!!, lngs.max()!!)
+        val north = LatLng(lats.maxOrNull()!!, lngs.maxOrNull()!!)
+        val south = LatLng(lats.minOrNull()!!, lngs.minOrNull()!!)
+        val west = LatLng(lats.maxOrNull()!!, lngs.minOrNull()!!)
+        val east = LatLng(lats.minOrNull()!!, lngs.maxOrNull()!!)
 
         val latLngBounds = LatLngBounds.builder()
           .include(north)

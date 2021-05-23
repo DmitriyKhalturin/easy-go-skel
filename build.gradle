@@ -1,6 +1,6 @@
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
-apply plugin: "kotlin-android-extensions"
+apply plugin: "kotlin-parcelize"
 apply plugin: "kotlin-kapt"
 
 android {
@@ -52,8 +52,8 @@ dependencies {
 
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-  implementation "org.koin:koin-android:$koin_version"
-  implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+  implementation "io.insert-koin:koin-android:$koin_version"
+  implementation "io.insert-koin:koin-androidx-viewmodel:$koin_version"
 
   implementation "androidx.appcompat:appcompat:$appcompat_version"
 
