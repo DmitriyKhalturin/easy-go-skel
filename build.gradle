@@ -63,7 +63,7 @@ dependencies {
 
   implementation "androidx.appcompat:appcompat:$appcompat_version"
 
-  implementation "androidx.lifecycle:lifecycle-extensions:$arch_lifecycle_version"
+  implementation "androidx.lifecycle:lifecycle-extensions:$arch_lifecycle_extension_version"
 
   implementation "androidx.room:room-runtime:$arch_persistent_room_version"
 
