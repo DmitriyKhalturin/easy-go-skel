@@ -17,22 +17,22 @@ import easy.go.skel.viewmodel.BaseViewModel
  * Created by Dmitriy Khalturin <dmitry.halturin.86@gmail.com>
  * for easy_go_skel on 06.04.20 16:36.
  */
-class NavigationViewModel : BaseViewModel(), Navigation {
+class NavigationService : Navigation, NavigationEntryPoint {
 
   private var fragmentActivity: FragmentActivity? = null
   private var fragmentManager: FragmentManager? = null
   private var fragmentContainerId: Int? = null
 
-  fun setViewContext(activity: FragmentActivity) {
+  override fun setViewContext(activity: FragmentActivity) {
     fragmentActivity = activity
     fragmentManager = activity.supportFragmentManager
   }
 
-  fun setContainerId(containerId: Int) {
+  override fun setContainerId(containerId: Int) {
     fragmentContainerId = containerId
   }
 
-  fun clearViewContext() {
+  override fun clearViewContext() {
     fragmentActivity = null
     fragmentContainerId = null
   }

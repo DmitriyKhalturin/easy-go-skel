@@ -3,7 +3,7 @@ package easy.go.skel.navigation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import javax.inject.Inject
 
 /**
  * Created by Dmitriy Khalturin <dmitry.halturin.86@gmail.com>
@@ -11,16 +11,20 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
  */
 abstract class NavigationActivity : AppCompatActivity() {
 
-  protected val navigationViewModel by viewModel<NavigationViewModel>()
+  @Inject
+  protected lateinit var navigationEntryPoint: NavigationEntryPoint
+
+  @Inject
+  protected lateinit var navigation: Navigation
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    navigationViewModel.setViewContext(this)
+    navigationEntryPoint.setViewContext(this)
   }
 
   override fun onDestroy() {
-    navigationViewModel.clearViewContext()
+    navigationEntryPoint.clearViewContext()
 
     super.onDestroy()
   }
