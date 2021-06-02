@@ -12,10 +12,10 @@ import javax.inject.Inject
 abstract class NavigationActivity : AppCompatActivity() {
 
   @Inject
-  protected lateinit var navigationEntryPoint: NavigationEntryPoint
+  lateinit var navigationEntryPoint: NavigationEntryPoint
 
   @Inject
-  protected lateinit var navigation: Navigation
+  lateinit var navigation: Navigation
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

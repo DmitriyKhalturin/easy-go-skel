@@ -12,7 +12,7 @@ import javax.inject.Inject
 open class NavigationFragment : Fragment() {
 
   @Inject
-  protected lateinit var navigation: Navigation
+  lateinit var navigation: Navigation
 
   private val navigationActivity: NavigationActivity? by lazy { activity as? NavigationActivity }
   protected open val haveBottomNavigation: Boolean = true
