@@ -57,10 +57,13 @@ dependencies {
 
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
   implementation "androidx.appcompat:appcompat:$appcompat_version"
 
   implementation "androidx.lifecycle:lifecycle-extensions:$arch_lifecycle_extension_version"
+  implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$arch_lifecycle_version"
 
   implementation "androidx.room:room-runtime:$arch_persistent_room_version"
 
